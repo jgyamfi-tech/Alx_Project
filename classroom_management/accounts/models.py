@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
 class CustomUser(AbstractUser):
     TEACHER = "Teacher"
     STUDENT = "Student"
@@ -17,4 +16,4 @@ class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
 
     def __str__(self):
-        return self.username
+        return f"{self.username} ({self.role})"
