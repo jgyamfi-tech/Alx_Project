@@ -38,3 +38,12 @@ class Assessment(models.Model):
 
     def __str__(self):
         return f"{self.student.user.username} - {self.assessment_type}: {self.score}"
+
+
+class Performance(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name="performance")
+    average_score = models.FloatField(default=0.0)
+    progress_status = models.CharField(max_length=20, default="Stable")  # Progressing, Declining, Stable
+
+    def __str__(self):
+        return f"{self.student.user.username} - {self.progress_status}"

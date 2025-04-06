@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Classroom, Student, Assessment
-from accounts.models import CustomUser
+from .models import Classroom, Student, Assessment, Performance
+from accounts.models import CustomUser 
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +16,11 @@ class AssessmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assessment
         fields = ["id", "student", "assessment_type", "score", "date"]
+
+
+class PerformanceSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.user.username', read_only=True)
+
+    class Meta:
+        model = Performance
+        fields = ["id", "student", "student_name", "average_score", "progress_status"]
